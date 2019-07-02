@@ -1,8 +1,7 @@
-import matplotlib.pyplot as plt
-import numpy as np 
-from scipy import stats 
-import seaborn as sns
-import easygui as eg
+import matplotlib.pyplot as plt #Matplotlib es una biblioteca de trazado 2D de Python
+import numpy as np #Paquete de matriz N-dimensional base
+from scipy import stats #SciPy es una biblioteca libre y de código abierto para Python. Se compone de herramientas y algoritmos matemáticos.
+import easygui as eg #libreria para emitir mensajes
 import statistics as stat #libreria para calculos estadisticos
 
 
@@ -18,28 +17,26 @@ sigma1 = eg.enterbox(msg='Entrada de la desviación estandar:',
                     default='',
                     image=None)
 
-print(sigma1)
+sigma = float(sigma1)  # transformamos e valor de nuestra caja de string a float
 
-sigma = float(sigma1)  
 
-# Graficando Normal
-# mu, sigma = 0, 0.2 # media y desvio estandar
+# Enviamos los parametros a la dist. normarl que son la media y la desviación estandar
 normal = stats.norm(mu, sigma)
+
+#Eje x para la gráfica
 x = np.linspace(normal.ppf(0.01),
                 normal.ppf(0.99), 100)
 print(x) # en el eje x de la gráfica
 
-# Calculo de valores estadisticos media mediana, varianzay desviación estándar
-
+# Calculo de valores estadisticos media mediana, varianza y desviación estándar
 media = str(stat.mean(x))
 mediana = str(stat.median(x))
-varianza = stat.pvariance(x)
-desv = str(stat.pstdev(x))
-a = "Media",media,"\nMediana: ",mediana, "\nVarianza Poblacional: ",varianza,"\nDesviacion Estandar: ",desv
 
 
+a = "Media",media,"\nMediana: ",mediana,"\nDesviación Estandar", sigma
 
-fp = normal.pdf(x) # Función de Probabilidad
+#Eje y para la gráfica
+fp = normal.pdf(x) # Función de Probabilidad - Función densidad de probabilidad
 print(fp) # en el eje y de la gráfica
 plt.plot(x, fp) # grafica en funcionde x e y
 # leyendas para la gráfica
@@ -48,14 +45,7 @@ plt.ylabel('Probabilidad')
 plt.xlabel('Valores')
 plt.show()
 eg.msgbox(msg = a,
-          title='Control: msgbox', 
+          title='Datos estadisticos en x', 
           ok_button='Continuar',
           image=None)
 
-# histograma
-aleatorios = normal.rvs(1000) # genera aleatorios
-cuenta, cajas, ignorar = plt.hist(aleatorios, 20)
-plt.ylabel('frequencia')
-plt.xlabel('valores')
-plt.title('Histograma Normal')
-plt.show()

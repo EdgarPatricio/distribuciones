@@ -1,8 +1,8 @@
-import matplotlib.pyplot as plt
-import numpy as np 
-from scipy import stats 
-import seaborn as sns
-import easygui as eg 
+import matplotlib.pyplot as plt #Matplotlib es una biblioteca de trazado 2D de Python
+import numpy as np #Paquete de matriz N-dimensional base
+from scipy import stats #SciPy es una biblioteca libre y de código abierto para Python. Se compone de herramientas y algoritmos matemáticos.
+import easygui as eg #libreria para emitir mensajes
+import statistics as stat #libreria para calculos estadisticos
 
 # Graficando Uniforme
 uniforme = stats.uniform()
@@ -24,3 +24,8 @@ plt.ylabel('frequencia')
 plt.xlabel('valores')
 plt.title('Histograma Uniforme')
 plt.show()
+mu = 5.0  
+sigma = 2.0  
+values = np.random.normal(mu, sigma, 10000)  
+plt.hist(values, 50)  
+plt.show() 
